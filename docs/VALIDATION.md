@@ -1,14 +1,16 @@
 # Validation plan: 14 days to real evidence
 
+First market: teachers from Kazakhstan who want to work at international schools abroad. Interview #1 is the founder: write down, step by step, how you searched for schools in one city, which sources you used, how many schools you found, and what took the most time. Then 9 more teachers.
+
 Goal: replace "my own pain" with named people, timings and a price signal before you spend on growth. This is also what makes the Claude for Startups application credible.
 
 ## Day 1-2: find 10 people
 
-Write down 10 real people outside the US/EU who are looking for a remote job now. Sources: your own contacts, local developer and professional chats, universities, alumni groups. Name, country, role, one line on where they search today.
+Write down 10 real people (including yourself) who are teachers or school staff considering work abroad. Sources: colleagues, teacher chats and groups, universities, alumni groups. Name, country, subject, one line on where they look for schools today.
 
 ## Day 3-7: watch, do not demo
 
-For 5 of them, screen-share while they apply to ONE job, without helping. Time each step:
+For 5 of them, screen-share while they apply to ONE school, without helping. Time each step:
 
 | Step | Minutes |
 |---|---|

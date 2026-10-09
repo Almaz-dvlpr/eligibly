@@ -1,6 +1,8 @@
 # Eligibly
 
-Remote jobs that are actually open to your country. Eligibly reads public job postings, turns the hiring rules into structured constraints, shows a YES / UNCLEAR / NO verdict per candidate country with the quoted sentence that proves it, and prepares an application pack. It stops at Apply: it never contacts employers or tracks replies.
+First market: teachers who want to work at international schools abroad (the founder's own use case). The demo runs the method on public remote tech postings; school data is not built yet.
+
+Eligibly reads public job postings, turns the hiring rules into structured constraints, shows a YES / UNCLEAR / NO verdict per candidate country with the quoted sentence that proves it, and prepares an application pack. It stops at Apply: it never contacts employers or tracks replies.
 
 Status: working prototype. See `docs/APPLICATION.md` (Claude for Startups draft) and `docs/VALIDATION.md` (14-day plan to get real evidence).
 
