@@ -1,4 +1,5 @@
-import { AssessmentSchema, SYSTEM_PROMPT, demoAssessment } from "@/lib/assess";
+import { AssessmentSchema, SYSTEM_PROMPT, demoAssessment, userMessage } from "@/lib/assess";
+import { completeJson, hasKey } from "@/lib/ai";
 
 const MAX_WORDS = 450;
 let day = "";
@@ -12,8 +13,7 @@ export async function POST(req: Request) {
   if (words < 50) return Response.json({ error: "Минимум 50 слов." }, { status: 400 });
   if (words > MAX_WORDS) return Response.json({ error: `Максимум ${MAX_WORDS} слов.` }, { status: 400 });
 
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) return Response.json({ demo: true, assessment: demoAssessment() });
+  if (!hasKey()) return Response.json({ demo: true, assessment: demoAssessment() });
 
   const today = new Date().toISOString().slice(0, 10);
   if (day !== today) { day = today; used = 0; }
@@ -22,21 +22,15 @@ export async function POST(req: Request) {
   }
   used++;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({
-      model: process.env.ELIGIBLY_IELTS_MODEL ?? "claude-haiku-5-5",
-      max_tokens: 2000,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: `Task prompt:\n${prompt}\n\nEssay:\n${essay}\n\nJSON schema keys: task_type("task2"), criteria{task_response,coherence_cohesion,lexical_resource,grammatical_range_accuracy: {estimated_band,evidence[{excerpt,issue,explanation}],strengths[],next_steps[]}}, skill_evidence[{skill_code,evidence_status(needs_practice|ok|insufficient_data),confidence}], needs_teacher_review(boolean).` }],
-    }),
-  });
-  if (!res.ok) return Response.json({ error: "Ошибка ИИ-сервиса, эссе не потеряно — попробуйте ещё раз." }, { status: 502 });
-  const data = await res.json();
-  const text: string = data?.content?.[0]?.text ?? "";
+  let r;
   try {
-    const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+    r = await completeJson(SYSTEM_PROMPT, userMessage(prompt, essay));
+  } catch {
+    return Response.json({ error: "Ошибка ИИ-сервиса, эссе не потеряно — попробуйте ещё раз." }, { status: 502 });
+  }
+  console.log(JSON.stringify({ op: "assess_essay", model: r.model, in: r.inputTokens, out: r.outputTokens }));
+  try {
+    const json = JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1));
     return Response.json({ demo: false, assessment: AssessmentSchema.parse(json) });
   } catch {
     return Response.json({ error: "Ответ модели не прошёл проверку схемы." }, { status: 502 });

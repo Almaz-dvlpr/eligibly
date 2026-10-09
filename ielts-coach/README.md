@@ -10,4 +10,4 @@ npm install && npm run dev
 ```
 
 ## Deploy to Vercel
-Import the repo, set **Root Directory = `ielts-coach`**, framework Next.js. Env vars: see `.env.example` (`ANTHROPIC_API_KEY` is optional; without it the app runs in demo mode).
+Import the repo, set **Root Directory = `ielts-coach`**, framework Next.js. Set `DEEPSEEK_API_KEY` (see `.env.example`); without a key the app runs in demo mode. `AI_PROVIDER=anthropic` switches provider.
