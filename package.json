@@ -1,0 +1,13 @@
+{
+  "name": "eligibly",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ingest": "node src/ingest.mjs",
+    "build": "node src/build.mjs",
+    "refresh": "node src/ingest.mjs && node src/build.mjs",
+    "test": "node --test \"test/*.test.mjs\"",
+    "serve": "node src/serve.mjs"
+  }
+}

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eligibly: remote jobs open to your country</title>
+<meta name="description" content="Most remote jobs are not open to you. Eligibly shows only the ones that are, with the quote that proves it, and prepares your application. We stop at Apply.">
+<style>
+:root{--bg:#fbfaf7;--ink:#17181a;--mute:#5d625f;--line:#e4e1d8;--card:#fff;--accent:#0b6b54;--yes:#0b6b54;--yesbg:#e4f3ed;--unc:#8a5a00;--uncbg:#fbf0d9;--no:#8a2f2f;--nobg:#f8e6e4}
+@media (prefers-color-scheme:dark){:root{--bg:#121413;--ink:#ecebe6;--mute:#a1a6a2;--line:#2a2e2c;--card:#1a1d1c;--accent:#4cc6a2;--yes:#4cc6a2;--yesbg:#16302a;--unc:#e8b45a;--uncbg:#33290f;--no:#ec9a96;--nobg:#351b1a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px}
+header{padding:20px 0;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;letter-spacing:-.02em;font-size:20px}
+.logo b{color:var(--accent)}
+h1{font-size:clamp(30px,6vw,48px);line-height:1.1;letter-spacing:-.03em;margin:28px 0 14px;max-width:18ch}
+.lead{font-size:19px;color:var(--mute);max-width:56ch;margin:0 0 24px}
+.stat{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 8px}
+.stat div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:150px;flex:1}
+.stat strong{display:block;font-size:30px;letter-spacing:-.02em}
+.stat span{color:var(--mute);font-size:14px}
+section{margin:44px 0}
+h2{font-size:24px;letter-spacing:-.02em;margin:0 0 12px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:0;list-style:none;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;counter-increment:s}
+.steps li:before{content:counter(s);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--bg);font-weight:700;font-size:14px;margin-bottom:8px}
+.steps b{display:block;margin-bottom:4px}
+.steps span{color:var(--mute);font-size:15px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:12px 0}
+label{font-size:13px;color:var(--mute);display:block;margin-bottom:4px}
+select,input,textarea,button{font:inherit;color:inherit}
+select,input,textarea{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:44px}
+textarea{width:100%;min-height:90px}
+button{background:var(--accent);color:var(--bg);border:0;border-radius:8px;padding:9px 14px;min-height:44px;font-weight:600;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tabs button{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.job{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+.job h3{margin:0 0 2px;font-size:17px}
+.meta{color:var(--mute);font-size:14px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;margin-right:6px}
+.YES{background:var(--yesbg);color:var(--yes)}.UNCLEAR{background:var(--uncbg);color:var(--unc)}.NO{background:var(--nobg);color:var(--no)}
+blockquote{margin:8px 0;padding:6px 10px;border-left:3px solid var(--line);color:var(--mute);font-size:14px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.actions a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:8px;background:var(--accent);color:var(--bg);text-decoration:none;font-weight:600}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--mute);font-size:15px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:600px){.grid2{grid-template-columns:1fr}}
+footer{padding:30px 0 50px;color:var(--mute);font-size:14px;border-top:1px solid var(--line);margin-top:50px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">Eligib<b>ly</b></div><a href="#demo" style="color:var(--accent);font-weight:600;text-decoration:none">Try it</a></header>
+
+<main>
+<h1>Remote jobs that are actually open to you.</h1>
+<p class="lead">Most “remote” postings quietly exclude your country. Eligibly reads the fine print, shows the line that proves a job is open to you, and prepares your application. We stop at Apply: from there, the conversation with the employer is yours.</p>
+
+<div class="stat" id="stats" aria-live="polite">
+  <div><strong id="s-total">…</strong><span>“remote” jobs checked at <span id="s-co">…</span> companies</span></div>
+  <div><strong id="s-yes">…</strong><span>verifiably open to <span class="cname">Kazakhstan</span></span></div>
+  <div><strong id="s-us">…</strong><span>open to the United States, for comparison</span></div>
+</div>
+<p class="meta" id="s-note"></p>
+
+<section>
+<h2>How it works</h2>
+<ol class="steps">
+<li><b>Pick your country</b><span>We compute your verdict from each job’s hiring rules: YES, UNCLEAR or NO.</span></li>
+<li><b>See the proof</b><span>Every YES shows the exact sentence from the posting. No quote, no YES.</span></li>
+<li><b>Get your pack</b><span>Your details and standard answers, ready to paste into the company’s form.</span></li>
+<li><b>You take it from there</b><span>We never write to employers or track your replies.</span></li>
+</ol>
+</section>
+
+<section id="demo">
+<h2>Live demo, real postings</h2>
+<div class="controls">
+  <div><label for="country">Your country</label><select id="country"></select></div>
+  <div><label for="q">Search title or company</label><input id="q" type="search" placeholder="e.g. engineer"></div>
+</div>
+<div class="tabs" role="group" aria-label="Verdict filter">
+  <button type="button" data-v="YES" aria-pressed="true">Open to me</button>
+  <button type="button" data-v="UNCLEAR" aria-pressed="false">Unclear</button>
+</div>
+<p class="meta" id="count" aria-live="polite"></p>
+<div id="jobs"></div>
+<button type="button" class="ghost" id="more" hidden>Show more</button>
+</section>
+
+<section>
+<h2>Your application pack</h2>
+<p class="meta">Stored only in this browser. Nothing is sent anywhere.</p>
+<div class="grid2">
+  <div><label for="p-name">Full name</label><input id="p-name" autocomplete="name" style="width:100%"></div>
+  <div><label for="p-email">Email</label><input id="p-email" type="email" autocomplete="email" style="width:100%"></div>
+  <div><label for="p-links">Links (LinkedIn, GitHub, portfolio)</label><input id="p-links" style="width:100%"></div>
+  <div><label for="p-notice">Start date / notice</label><input id="p-notice" placeholder="e.g. 2 weeks" style="width:100%"></div>
+</div>
+<div style="margin-top:10px"><label for="p-why">Standard answer: why this kind of role?</label><textarea id="p-why"></textarea></div>
+<div class="actions" style="margin-top:10px"><button type="button" id="copy">Copy pack</button><span class="meta" id="copied" role="status"></span></div>
+</section>
+
+<section>
+<div class="note"><b>Where we stop.</b> Eligibly helps you find jobs you can actually take and get your application ready. It does not email employers, answer recruiters or track your replies. After you click Apply, the process is yours.</div>
+</section>
+</main>
+
+<footer>Eligibly is an early prototype. Verdicts come from a rule-based reader of public postings and can be wrong: check the quoted line and the posting before you apply. Data: public Greenhouse job boards, refreshed on demand.</footer>
+</div>
+
+<script type="module">
+import { evaluate, COUNTRIES } from "./eligibility.mjs";
+const $ = (id) => document.getElementById(id);
+const store = { get(k, d) { try { return localStorage.getItem(k) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const nice = (t) => t.replace(/(^|[-_ ])(\w)/g, (m, a, b) => (a ? " " : "") + b.toUpperCase());
+
+let data; let verdict = "YES"; let shown = 40;
+const names = COUNTRIES.map((c) => c.name).sort();
+$("country").innerHTML = names.map((n) => `<option>${esc(n)}</option>`).join("");
+$("country").value = store.get("eligibly.country", "Kazakhstan");
+
+function compute() {
+  const country = $("country").value;
+  return data.jobs.map((j) => ({ j, r: evaluate(j.constraints, country) }));
+}
+function stats() {
+  const country = $("country").value;
+  const all = compute();
+  const yes = all.filter((x) => x.r.verdict === "YES").length;
+  $("s-total").textContent = all.length.toLocaleString();
+  $("s-co").textContent = new Set(data.jobs.map((j) => j.company)).size;
+  $("s-yes").textContent = yes.toLocaleString();
+  $("s-us").textContent = data.jobs.filter((j) => evaluate(j.constraints, "United States").verdict === "YES").length.toLocaleString();
+  document.querySelectorAll(".cname").forEach((e) => (e.textContent = country));
+  $("s-note").textContent = `Snapshot ${new Date(data.generated_at).toLocaleDateString()}. Classifier: ${data.classifier}. Precision first: when the posting does not state a rule, the verdict is UNCLEAR, never YES.`;
+}
+let visible = [];
+function render() {
+  const q = $("q").value.trim().toLowerCase();
+  visible = compute().filter((x) => x.r.verdict === verdict && (!q || (x.j.title + " " + x.j.company).toLowerCase().includes(q)));
+  $("count").textContent = `${visible.length} ${verdict === "YES" ? "jobs open to" : "unclear jobs for"} ${$("country").value}`;
+  $("jobs").innerHTML = visible.slice(0, shown).map(({ j, r }) => `
+    <article class="job">
+      <h3>${esc(j.title)}</h3>
+      <div class="meta">${esc(nice(j.company))} · ${esc(j.location)}</div>
+      <div style="margin-top:6px"><span class="badge ${r.verdict}">${r.verdict}</span><span class="meta">${esc(r.why)}</span>${j.constraints.sponsorship === "yes" ? ' <span class="badge YES">Sponsorship mentioned</span>' : j.constraints.sponsorship === "no" ? ' <span class="badge NO">No sponsorship</span>' : ""}</div>
+      ${j.constraints.quote ? `<blockquote>“${esc(j.constraints.quote)}”</blockquote>` : ""}
+      <div class="actions"><a href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">Apply on company site</a></div>
+    </article>`).join("") || `<p class="meta">Nothing here. Try another filter, or check the “Unclear” tab.</p>`;
+  $("more").hidden = visible.length <= shown;
+}
+document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => {
+  verdict = b.dataset.v; shown = 40;
+  document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+$("country").addEventListener("change", () => { store.set("eligibly.country", $("country").value); shown = 40; stats(); render(); });
+$("q").addEventListener("input", () => { shown = 40; render(); });
+$("more").addEventListener("click", () => { shown += 40; render(); });
+
+for (const f of ["name", "email", "links", "notice", "why"]) {
+  const el = $("p-" + f); el.value = store.get("eligibly.p." + f, "");
+  el.addEventListener("input", () => store.set("eligibly.p." + f, el.value));
+}
+$("copy").addEventListener("click", async () => {
+  const v = (f) => $("p-" + f).value.trim();
+  const text = [`Name: ${v("name")}`, `Email: ${v("email")}`, `Links: ${v("links")}`, `Start date / notice: ${v("notice")}`, `Country: ${$("country").value}`, ``, `Why this kind of role:`, v("why")].join("\n");
+  try { await navigator.clipboard.writeText(text); $("copied").textContent = "Copied."; } catch { $("copied").textContent = "Copy failed. Select the fields manually."; }
+});
+
+try {
+  data = await (await fetch("data.json")).json();
+  stats(); render();
+} catch {
+  $("count").textContent = "Could not load job data. Run npm run refresh, then reload.";
+}
+</script>
+</body>
+</html>
