@@ -53,7 +53,7 @@ Subscription for job seekers, price not set yet; it will be set from the concier
 
 ## Team
 
-[FILL: your name, background, why you are the person for this problem. Mention your own experience applying for jobs abroad if true.]
+**Almaz Amirzhan, founder.** I work as an English teacher at a private school. While looking for teaching jobs abroad, I asked Claude to help me send my CV to every private international school in one city abroad. That attempt is where this company comes from: I lived the problem as the user, including the repetitive applications and the uncertainty about which schools would actually consider a candidate from my country. I build the product from that user's point of view and use Claude as my engineering partner for the prototype.
 
 ## Links
 
