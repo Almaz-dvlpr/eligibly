@@ -1,11 +1,10 @@
 # Claude for Startups: application draft (Eligibly)
 
-> **Check before you send.** I could not open Anthropic's official program page from here. Third-party guides disagree on credit amounts (about $1,000 to $5,000 direct, more via a VC or accelerator referral) and on eligibility (incorporated company, business email, company age or funding limits). Read the official page, then fix the fields below to match it. Do not copy a number from this file into the form without checking.
-> Candidate official page, per third-party guides: claude.com/programs/startups.
+> **Official program page (read 2026-10-09, claude.com/programs/startups).** No VC funding required: bootstrapped, pre-seed and venture-backed startups can apply. Apply by signing in to the Claude Console and filling out the application. Review aims for one week, decision by email. The page says the Claude Team and $1,000 API credit offers are currently over capacity and all applications are being re-reviewed, so those credits are not guaranteed. Members get the Claude Startup Stack (third-party discounts and credits, "worth up to $45,000"), Applied AI office hours (45 minutes, every other week), events, and higher API rate limits if they receive credits. Credits work only on the first-party Claude API in Console, not Bedrock or Vertex. VC-partner referral can add up to $100K. The page does not list incorporation or company-age requirements: read the form itself before you assume any.
 
 ## Before you apply: blockers to clear (in order)
 
-1. **A legal entity or whatever the form accepts.** If the form asks for a registered company, register one first. If it accepts a sole founder, say so honestly.
+1. **A legal entity or whatever the form accepts.** The program page does not state an incorporation requirement. If the Console form asks for a registered company, say honestly what you have.
 2. **A public URL.** Deploy `site/` (static; works on Vercel, Netlify, Cloudflare Pages or GitHub Pages). Put the URL in the form.
 3. **A business email on your own domain**, if the form requires it.
 4. **Your real numbers.** Replace every `[FILL]` below. Leave traction blank rather than invent it.
