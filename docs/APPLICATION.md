@@ -64,4 +64,5 @@ Subscription for job seekers, price not set yet; it will be set from the concier
 
 - Demo: https://eligibly.xyz
 - Code: https://github.com/Almaz-dvlpr/eligibly
+- Founder: https://www.linkedin.com/in/almaz-amirzhan-b6600b5b
 - Design doc and engineering review: `docs/DESIGN.md`
