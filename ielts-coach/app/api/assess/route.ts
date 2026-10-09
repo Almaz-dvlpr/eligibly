@@ -13,7 +13,9 @@ export async function POST(req: Request) {
   if (words < 50) return Response.json({ error: "Минимум 50 слов." }, { status: 400 });
   if (words > MAX_WORDS) return Response.json({ error: `Максимум ${MAX_WORDS} слов.` }, { status: 400 });
 
-  if (!hasKey()) return Response.json({ demo: true, assessment: demoAssessment() });
+  // In production real AI spend requires the access gate to be on.
+  const gated = !!process.env.ACCESS_CODE || process.env.NODE_ENV !== "production";
+  if (!hasKey() || !gated) return Response.json({ demo: true, assessment: demoAssessment() });
 
   const today = new Date().toISOString().slice(0, 10);
   if (day !== today) { day = today; used = 0; }
