@@ -5,6 +5,8 @@ import { supabaseConfigured } from "@/lib/supabase/env";
 import { applyAssessment } from "@/lib/learning";
 import { ALL_QUESTIONS } from "@/lib/topics";
 
+export const maxDuration = 60; // seconds; the default on Vercel is too short for a full essay check
+
 const MIN_WORDS = 50;
 const MAX_WORDS = 500;
 
@@ -42,7 +44,8 @@ export async function POST(req: Request) {
   let r;
   try {
     r = await completeJson(SYSTEM_PROMPT, userMessage(prompt, essay));
-  } catch {
+  } catch (e) {
+    console.error("assess_essay AI call failed:", e);
     await db.from("ai_usage_logs").insert({ user_id: userId, operation_type: "assess_essay", status: "error" });
     await db.from("submissions").update({ status: "failed" }).eq("id", sub.id);
     return Response.json({ error: "The AI service had a problem. Your essay is saved; please try again later.", id: sub.id }, { status: 502 });
@@ -52,7 +55,8 @@ export async function POST(req: Request) {
   let assessment;
   try {
     assessment = AssessmentSchema.parse(JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1)));
-  } catch {
+  } catch (e) {
+    console.error("assess_essay invalid AI reply:", String(e).slice(0, 500), r.text.slice(0, 300));
     await db.from("submissions").update({ status: "failed" }).eq("id", sub.id);
     return Response.json({ error: "The AI reply could not be validated. Your essay is saved.", id: sub.id }, { status: 502 });
   }

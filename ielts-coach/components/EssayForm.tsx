@@ -33,7 +33,7 @@ export default function EssayForm({ topics, initialTopic, initialQ }: { topics: 
     setBusy(true); setError(""); setDemo(null);
     try {
       const res = await fetch("/api/assess", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ prompt: question.text, essay }) });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({ error: res.status === 504 || res.status === 408 ? "The check took too long. Please try again." : `Server error (${res.status}). Please try again.` }));
       if (!res.ok) setError(data.error ?? "Something went wrong.");
       else if (data.demo) setDemo(data.assessment);
       else { try { localStorage.removeItem(key); } catch {} router.push(`/writing/${data.id}`); }

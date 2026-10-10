@@ -1,36 +1,40 @@
 import { z } from "zod";
 
+// Lenient on purpose: models drift on counts, casing and number formats. We normalise instead of rejecting a whole essay.
+const num = (min: number, max: number) => z.preprocess((v) => (typeof v === "string" ? Number(v) : v), z.number().transform((n) => Math.min(max, Math.max(min, n))));
+const list = <T extends z.ZodTypeAny>(item: T, max: number) => z.array(item).default([]).transform((a) => a.slice(0, max));
+
 const Criterion = z.object({
-  estimated_band: z.number().min(0).max(9),
-  evidence: z.array(z.object({
-    excerpt: z.string(), issue: z.string(), explanation: z.string(),
+  estimated_band: num(0, 9),
+  evidence: list(z.object({
+    excerpt: z.string().default(""), issue: z.string().default(""), explanation: z.string().default(""),
     suggested_correction: z.string().optional(),
-  })).max(6),
-  strengths: z.array(z.string()).max(4),
-  next_steps: z.array(z.string()).max(4),
+  }), 6),
+  strengths: list(z.string(), 4),
+  next_steps: list(z.string(), 4),
 });
 
 export const AssessmentSchema = z.object({
-  task_type: z.literal("task2"),
+  task_type: z.any().transform(() => "task2" as const),
   criteria: z.object({
     task_response: Criterion,
     coherence_cohesion: Criterion,
     lexical_resource: Criterion,
     grammatical_range_accuracy: Criterion,
   }),
-  skill_evidence: z.array(z.object({
-    skill_code: z.string(),
-    evidence_status: z.enum(["needs_practice", "ok", "insufficient_data"]),
-    confidence: z.number().min(0).max(1),
-    score: z.number().min(0).max(1).optional(),
-  })),
-  vocabulary_suggestions: z.array(z.object({ term: z.string(), meaning: z.string(), example: z.string() })).max(5).optional(),
-  needs_teacher_review: z.boolean(),
+  skill_evidence: list(z.object({
+    skill_code: z.string().transform((c) => c.trim().toUpperCase()),
+    evidence_status: z.string().transform((v) => (v === "ok" || v === "insufficient_data" ? v : "needs_practice") as "needs_practice" | "ok" | "insufficient_data"),
+    confidence: num(0, 1).default(0.5),
+    score: num(0, 1).optional(),
+  }), 16),
+  vocabulary_suggestions: list(z.object({ term: z.string(), meaning: z.string().default(""), example: z.string().default("") }), 5).optional(),
+  needs_teacher_review: z.boolean().default(false),
 });
 export type Assessment = z.infer<typeof AssessmentSchema>;
 
 export const SYSTEM_PROMPT = `You are a supportive, precise IELTS Writing Task 2 examiner-coach. Assess the essay against the four public band descriptors.
-Return ONLY a json object matching the requested keys. Write all feedback in clear English, in an encouraging tone: lead with what works, then give concrete improvements. Never use words like "bad" or "weak".
+Return ONLY a json object matching the requested keys. Be concise: at most 2 evidence items and 2 strengths per criterion, one short sentence each. Write all feedback in clear English, in an encouraging tone: lead with what works, then give concrete improvements. Never use words like "bad" or "weak".
 Rules:
 - Every issue must quote an exact excerpt from the essay. For language issues add suggested_correction with a better version of that sentence.
 - Bands are estimates in 0.5 steps, not official scores. If the essay is too short or off-topic, lower Task Response and set needs_teacher_review true.

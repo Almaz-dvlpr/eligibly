@@ -10,13 +10,14 @@ export function hasKey(): boolean {
   return provider() === "deepseek" ? !!process.env.DEEPSEEK_API_KEY : !!process.env.ANTHROPIC_API_KEY;
 }
 
-export async function completeJson(system: string, user: string, maxTokens = 2000): Promise<AiResult> {
+export async function completeJson(system: string, user: string, maxTokens = 4000): Promise<AiResult> {
   if (provider() === "deepseek") {
     // DeepSeek is OpenAI-compatible. JSON mode requires the word "json" in the prompt.
     const model = process.env.DEEPSEEK_MODEL ?? "deepseek-chat";
     const base = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com";
     const res = await fetch(`${base}/chat/completions`, {
       method: "POST",
+      signal: AbortSignal.timeout(55_000),
       headers: { authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`, "content-type": "application/json" },
       body: JSON.stringify({
         model,
@@ -26,17 +27,18 @@ export async function completeJson(system: string, user: string, maxTokens = 200
         messages: [{ role: "system", content: system }, { role: "user", content: user }],
       }),
     });
-    if (!res.ok) throw new Error(`deepseek ${res.status}`);
+    if (!res.ok) throw new Error(`deepseek ${res.status}: ${(await res.text()).slice(0, 200)}`);
     const d = await res.json();
     return { text: d?.choices?.[0]?.message?.content ?? "", inputTokens: d?.usage?.prompt_tokens, outputTokens: d?.usage?.completion_tokens, model };
   }
   const model = process.env.ANTHROPIC_MODEL ?? "claude-haiku-5-5";
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
+    signal: AbortSignal.timeout(55_000),
     headers: { "x-api-key": process.env.ANTHROPIC_API_KEY!, "anthropic-version": "2023-06-01", "content-type": "application/json" },
     body: JSON.stringify({ model, max_tokens: maxTokens, system, messages: [{ role: "user", content: user }] }),
   });
-  if (!res.ok) throw new Error(`anthropic ${res.status}`);
+  if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const d = await res.json();
   return { text: d?.content?.[0]?.text ?? "", inputTokens: d?.usage?.input_tokens, outputTokens: d?.usage?.output_tokens, model };
 }
