@@ -21,14 +21,26 @@ const DEFAULT_MODEL: Record<OcrProvider, string> = { gemini: "gemini-flash-lates
 const GEMINI_FALLBACKS = ["gemini-2.5-flash", "gemini-2.0-flash"];
 
 export class OcrError extends Error {
-  constructor(public provider: OcrProvider, public status: number) { super(`${provider} ${status}`); }
+  // status 0 means the request never got an HTTP answer: see `reason`.
+  constructor(public provider: OcrProvider, public status: number, public reason?: "timed out" | "network error") { super(`${provider} ${reason ?? status}`); }
+}
+
+// Kept under the 60 s function limit so we can answer with a clear message instead of being killed.
+const TIMEOUT_MS = Number(process.env.OCR_TIMEOUT_MS ?? 50_000);
+
+async function call(provider: OcrProvider, url: string, init: RequestInit): Promise<Response> {
+  try {
+    return await fetch(url, { ...init, signal: AbortSignal.timeout(TIMEOUT_MS) });
+  } catch (e) {
+    console.error(`${provider} request failed:`, e);
+    throw new OcrError(provider, 0, e instanceof Error && (e.name === "TimeoutError" || e.name === "AbortError") ? "timed out" : "network error");
+  }
 }
 
 export async function transcribe(mime: string, base64: string): Promise<{ text: string; model: string; provider: OcrProvider }> {
   const provider = ocrProvider();
   if (!provider) throw new Error("no OCR provider configured");
   const model = process.env.OCR_MODEL ?? DEFAULT_MODEL[provider];
-  const signal = AbortSignal.timeout(55_000);
   let text = "";
 
   if (provider === "gemini") {
@@ -36,14 +48,26 @@ export async function transcribe(mime: string, base64: string): Promise<{ text: 
     const candidates = process.env.OCR_MODEL ? [model] : [model, ...GEMINI_FALLBACKS];
     let lastStatus = 0;
     for (const m of candidates) {
-      const res = await fetch(`${base}/v1beta/models/${m}:generateContent`, {
-        method: "POST", signal,
+      // Thinking is switched off: for plain transcription it only adds delay (and can eat the output budget).
+      let res = await call(provider, `${base}/v1beta/models/${m}:generateContent`, {
+        method: "POST",
         headers: { "x-goog-api-key": keys().gemini!, "content-type": "application/json" },
         body: JSON.stringify({
           contents: [{ parts: [{ inline_data: { mime_type: mime, data: base64 } }, { text: PROMPT }] }],
-          generationConfig: { temperature: 0, maxOutputTokens: 4000 },
+          generationConfig: { temperature: 0, maxOutputTokens: 4000, thinkingConfig: { thinkingBudget: 0 } },
         }),
       });
+      if (res.status === 400) { // some models reject the thinking setting: retry the same model without it
+        console.error(`gemini ${m} with thinkingBudget -> 400: ${(await res.text()).slice(0, 200)}`);
+        res = await call(provider, `${base}/v1beta/models/${m}:generateContent`, {
+          method: "POST",
+          headers: { "x-goog-api-key": keys().gemini!, "content-type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ inline_data: { mime_type: mime, data: base64 } }, { text: PROMPT }] }],
+            generationConfig: { temperature: 0, maxOutputTokens: 4000 },
+          }),
+        });
+      }
       if (res.ok) {
         const d = await res.json();
         text = (d?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
@@ -56,8 +80,8 @@ export async function transcribe(mime: string, base64: string): Promise<{ text: 
     throw new OcrError(provider, lastStatus);
   } else if (provider === "openai") {
     const base = process.env.OPENAI_BASE_URL ?? "https://api.openai.com";
-    const res = await fetch(`${base}/v1/chat/completions`, {
-      method: "POST", signal,
+    const res = await call(provider, `${base}/v1/chat/completions`, {
+      method: "POST",
       headers: { authorization: `Bearer ${keys().openai}`, "content-type": "application/json" },
       body: JSON.stringify({
         model, max_tokens: 4000, temperature: 0,
@@ -69,8 +93,8 @@ export async function transcribe(mime: string, base64: string): Promise<{ text: 
     text = d?.choices?.[0]?.message?.content ?? "";
   } else {
     const base = process.env.ANTHROPIC_BASE_URL ?? "https://api.anthropic.com";
-    const res = await fetch(`${base}/v1/messages`, {
-      method: "POST", signal,
+    const res = await call(provider, `${base}/v1/messages`, {
+      method: "POST",
       headers: { "x-api-key": keys().anthropic!, "anthropic-version": "2023-06-01", "content-type": "application/json" },
       body: JSON.stringify({ model, max_tokens: 4000, messages: [{ role: "user", content: [{ type: "image", source: { type: "base64", media_type: mime, data: base64 } }, { type: "text", text: PROMPT }] }] }),
     });

@@ -37,12 +37,13 @@ export async function POST(req: Request) {
     console.error("ocr failed:", e);
     await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", status: "error" });
     const hint = e instanceof OcrError
-      ? e.status === 401 || e.status === 403 ? " The AI key was rejected: check the key in the site settings."
+      ? e.reason === "timed out" ? " The AI service took too long. Try a closer, sharper photo of one page."
+        : e.status === 401 || e.status === 403 ? " The AI key was rejected: check the key in the site settings."
         : e.status === 429 ? " The AI service is out of quota or rate-limited."
         : e.status === 404 || e.status === 400 ? " The AI model name or the request was rejected."
         : ""
       : "";
-    const code = e instanceof OcrError ? ` (${e.provider} ${e.status})` : "";
+    const code = e instanceof OcrError ? ` (${e.provider} ${e.reason ?? e.status})` : "";
     return Response.json({ error: `Could not read the image${code}.${hint} Please try again.` }, { status: 502 });
   }
 }
