@@ -25,6 +25,7 @@ export default function AssessmentView({ a, practiceHref, canSave = true }: { a:
             <div className="card" key={c.key}>
               <small className="muted">{c.label}</small>
               <div className="band">{cr.estimated_band.toFixed(1)}</div>
+              {cr.rationale && <p className="muted" style={{ fontSize: ".9rem" }}>{cr.rationale}</p>}
               {cr.evidence.map((e, i) => (
                 <div key={i}>
                   <div className="quote">&ldquo;{e.excerpt}&rdquo;</div>
@@ -47,6 +48,9 @@ export default function AssessmentView({ a, practiceHref, canSave = true }: { a:
             </div>
           ))}
         </>
+      )}
+      {a.calibration_notes && a.calibration_notes.length > 0 && (
+        <div className="panel growth"><h3>How the band was checked</h3>{a.calibration_notes.map((n, i) => <p key={i} style={{ margin: ".3em 0" }}>{n}</p>)}</div>
       )}
       {a.needs_teacher_review && <p className="muted">A teacher review is recommended for this essay.</p>}
       {practiceHref && <p><Link className="btn" href={practiceHref}>Practise this skill</Link></p>}

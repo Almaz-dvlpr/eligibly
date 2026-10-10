@@ -22,7 +22,7 @@ export async function completeJson(system: string, user: string, maxTokens = 400
       body: JSON.stringify({
         model,
         max_tokens: maxTokens,
-        temperature: 0.2,
+        temperature: 0.1,
         response_format: { type: "json_object" },
         messages: [{ role: "system", content: system }, { role: "user", content: user }],
       }),

@@ -1,4 +1,5 @@
-import { AssessmentSchema, SYSTEM_PROMPT, demoAssessment, userMessage } from "@/lib/assess";
+import { AssessmentSchema, SYSTEM_PROMPT, applyCaps, demoAssessment, userMessage } from "@/lib/assess";
+import { textMetrics } from "@/lib/metrics";
 import { completeJson, hasKey } from "@/lib/ai";
 import { adminClient, serverClient } from "@/lib/supabase/server";
 import { supabaseConfigured } from "@/lib/supabase/env";
@@ -41,9 +42,10 @@ export async function POST(req: Request) {
     .insert({ student_id: userId, task_prompt: prompt, essay_text: essay, word_count: words }).select("id").single();
   if (subErr || !sub) return Response.json({ error: "Could not save the essay." }, { status: 500 });
 
+  const metrics = textMetrics(essay);
   let r;
   try {
-    r = await completeJson(SYSTEM_PROMPT, userMessage(prompt, essay));
+    r = await completeJson(SYSTEM_PROMPT, userMessage(prompt, essay, metrics));
   } catch (e) {
     console.error("assess_essay AI call failed:", e);
     await db.from("ai_usage_logs").insert({ user_id: userId, operation_type: "assess_essay", status: "error" });
@@ -54,7 +56,7 @@ export async function POST(req: Request) {
 
   let assessment;
   try {
-    assessment = AssessmentSchema.parse(JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1)));
+    assessment = applyCaps(AssessmentSchema.parse(JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1))), metrics);
   } catch (e) {
     console.error("assess_essay invalid AI reply:", String(e).slice(0, 500), r.text.slice(0, 300));
     await db.from("submissions").update({ status: "failed" }).eq("id", sub.id);
