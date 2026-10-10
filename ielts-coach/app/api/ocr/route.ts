@@ -1,6 +1,6 @@
 import { serverClient, adminClient } from "@/lib/supabase/server";
 import { supabaseConfigured } from "@/lib/supabase/env";
-import { ocrProvider, transcribe } from "@/lib/ocr";
+import { OcrError, ocrProvider, transcribe } from "@/lib/ocr";
 
 export const maxDuration = 60;
 
@@ -9,7 +9,7 @@ export const maxDuration = 60;
 const enabled = () => !!ocrProvider() && supabaseConfigured() && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function GET() {
-  return Response.json({ enabled: enabled() });
+  return Response.json({ enabled: enabled(), provider: ocrProvider() });
 }
 
 export async function POST(req: Request) {
@@ -36,6 +36,13 @@ export async function POST(req: Request) {
   } catch (e) {
     console.error("ocr failed:", e);
     await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", status: "error" });
-    return Response.json({ error: "Could not read the image. Please try again." }, { status: 502 });
+    const hint = e instanceof OcrError
+      ? e.status === 401 || e.status === 403 ? " The AI key was rejected: check the key in the site settings."
+        : e.status === 429 ? " The AI service is out of quota or rate-limited."
+        : e.status === 404 || e.status === 400 ? " The AI model name or the request was rejected."
+        : ""
+      : "";
+    const code = e instanceof OcrError ? ` (${e.provider} ${e.status})` : "";
+    return Response.json({ error: `Could not read the image${code}.${hint} Please try again.` }, { status: 502 });
   }
 }
