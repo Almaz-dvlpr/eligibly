@@ -61,16 +61,21 @@ async function toBlob(src: Blob | HTMLCanvasElement, maxSide: number): Promise<B
   const ctx = c.getContext("2d")!;
   ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
   ctx.drawImage((bmp ?? src) as CanvasImageSource, 0, 0, c.width, c.height);
-  return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("encode"))), "image/jpeg", 0.92));
+  return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("encode"))), "image/jpeg", 0.9));
 }
 
 async function serverOcr(blob: Blob): Promise<string> {
-  const small = await toBlob(blob, 2400);
+  const small = await toBlob(blob, 2000);
   const dataUrl: string = await new Promise((res) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.readAsDataURL(small); });
-  const r = await fetch("/api/ocr", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ image: dataUrl }) });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(j.error ?? `OCR failed (${r.status})`);
-  return j.text as string;
+  let last = "";
+  for (let attempt = 0; attempt < 2; attempt++) { // one automatic retry: a slow or failed first try often succeeds the second time
+    const r = await fetch("/api/ocr", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ image: dataUrl }) }).catch(() => null);
+    const j = r ? await r.json().catch(() => ({})) : {};
+    if (r?.ok) return j.text as string;
+    last = j.error ?? (r ? `OCR failed (${r.status})` : "No connection.");
+    if (r && r.status < 500) break; // sign-in, limit or bad-request errors will not change on retry
+  }
+  throw new Error(last);
 }
 
 async function ocr(src: Blob | HTMLCanvasElement, useServer: boolean, onProgress: Progress, warnings: string[]): Promise<{ text: string; server: boolean; confidence?: number }> {

@@ -4,6 +4,7 @@ import { completeJson, hasKey } from "@/lib/ai";
 import { adminClient, serverClient } from "@/lib/supabase/server";
 import { supabaseConfigured } from "@/lib/supabase/env";
 import { applyAssessment } from "@/lib/learning";
+import { limitMessage } from "@/lib/usage";
 import { ALL_QUESTIONS } from "@/lib/topics";
 
 export const maxDuration = 60; // seconds; the default on Vercel is too short for a full essay check
@@ -31,11 +32,9 @@ export async function POST(req: Request) {
   const userId = auth.user.id;
   const db = adminClient();
 
-  const limit = Number(process.env.IELTS_DAILY_ASSESS_LIMIT ?? 5);
-  const dayStart = new Date(); dayStart.setUTCHours(0, 0, 0, 0);
-  const { count } = await db.from("ai_usage_logs").select("id", { count: "exact", head: true })
-    .eq("user_id", userId).eq("operation_type", "assess_essay").gte("created_at", dayStart.toISOString());
-  if ((count ?? 0) >= limit) return Response.json({ error: `Daily limit of ${limit} checks reached. Please come back tomorrow.` }, { status: 429 });
+  const limit = Number(process.env.IELTS_DAILY_ASSESS_LIMIT ?? 10);
+  const blocked = await limitMessage(db, userId, "assess_essay", limit, "checks");
+  if (blocked) return Response.json({ error: blocked }, { status: 429 });
 
   // Save the essay first: an AI failure must never lose it.
   const { data: sub, error: subErr } = await db.from("submissions")

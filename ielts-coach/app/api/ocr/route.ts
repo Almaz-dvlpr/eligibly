@@ -1,6 +1,7 @@
 import { serverClient, adminClient } from "@/lib/supabase/server";
 import { supabaseConfigured } from "@/lib/supabase/env";
 import { OcrError, ocrProvider, transcribe } from "@/lib/ocr";
+import { limitMessage } from "@/lib/usage";
 
 export const maxDuration = 60;
 
@@ -9,7 +10,7 @@ export const maxDuration = 60;
 const enabled = () => !!ocrProvider() && supabaseConfigured() && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function GET() {
-  return Response.json({ enabled: enabled(), provider: ocrProvider(), limit: Number(process.env.IELTS_DAILY_OCR_LIMIT ?? 10) });
+  return Response.json({ enabled: enabled(), provider: ocrProvider(), limit: Number(process.env.IELTS_DAILY_OCR_LIMIT ?? 30) });
 }
 
 export async function POST(req: Request) {
@@ -23,11 +24,9 @@ export async function POST(req: Request) {
   if (m[2].length > 5_000_000) return Response.json({ error: "Image is too large." }, { status: 413 });
 
   const db = adminClient();
-  const limit = Number(process.env.IELTS_DAILY_OCR_LIMIT ?? 10);
-  const dayStart = new Date(); dayStart.setUTCHours(0, 0, 0, 0);
-  const { count } = await db.from("ai_usage_logs").select("id", { count: "exact", head: true })
-    .eq("user_id", auth.user.id).eq("operation_type", "ocr").gte("created_at", dayStart.toISOString());
-  if ((count ?? 0) >= limit) return Response.json({ error: `Daily limit of ${limit} image reads reached.` }, { status: 429 });
+  const limit = Number(process.env.IELTS_DAILY_OCR_LIMIT ?? 30);
+  const blocked = await limitMessage(db, auth.user.id, "ocr", limit, "image reads");
+  if (blocked) return Response.json({ error: blocked }, { status: 429 });
 
   try {
     const r = await transcribe(m[1], m[2]);
@@ -37,12 +36,13 @@ export async function POST(req: Request) {
     console.error("ocr failed:", e);
     await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", status: "error" });
     const hint = e instanceof OcrError
-      ? e.status === 401 || e.status === 403 ? " The AI key was rejected: check the key in the site settings."
+      ? e.reason === "timed out" ? " The AI service took too long. Try a closer, sharper photo of one page."
+        : e.status === 401 || e.status === 403 ? " The AI key was rejected: check the key in the site settings."
         : e.status === 429 ? " The AI service is out of quota or rate-limited."
         : e.status === 404 || e.status === 400 ? " The AI model name or the request was rejected."
         : ""
       : "";
-    const code = e instanceof OcrError ? ` (${e.provider} ${e.status})` : "";
+    const code = e instanceof OcrError ? ` (${e.provider} ${e.reason ?? e.status})` : "";
     return Response.json({ error: `Could not read the image${code}.${hint} Please try again.` }, { status: 502 });
   }
 }
