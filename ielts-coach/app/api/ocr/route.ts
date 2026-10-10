@@ -1,18 +1,19 @@
 import { serverClient, adminClient } from "@/lib/supabase/server";
 import { supabaseConfigured } from "@/lib/supabase/env";
+import { ocrProvider, transcribe } from "@/lib/ocr";
 
 export const maxDuration = 60;
 
-// Optional server-side OCR with a vision model: much better on handwriting than the in-browser engine.
-// Enabled only when a key and a database are configured, so usage can be tied to a signed-in user and limited.
-const enabled = () => !!process.env.OCR_ANTHROPIC_API_KEY && supabaseConfigured() && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
+// AI image reading (much better on handwriting than the in-browser engine). Enabled only with a provider key
+// AND a database, so every call is tied to a signed-in user and limited per day.
+const enabled = () => !!ocrProvider() && supabaseConfigured() && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function GET() {
   return Response.json({ enabled: enabled() });
 }
 
 export async function POST(req: Request) {
-  if (!enabled()) return Response.json({ error: "Server OCR is not enabled." }, { status: 503 });
+  if (!enabled()) return Response.json({ error: "AI image reading is not enabled." }, { status: 503 });
   const { data: auth } = await (await serverClient()).auth.getUser();
   if (!auth.user) return Response.json({ error: "Please sign in." }, { status: 401 });
 
@@ -28,21 +29,13 @@ export async function POST(req: Request) {
     .eq("user_id", auth.user.id).eq("operation_type", "ocr").gte("created_at", dayStart.toISOString());
   if ((count ?? 0) >= limit) return Response.json({ error: `Daily limit of ${limit} image reads reached.` }, { status: 429 });
 
-  const model = process.env.OCR_MODEL ?? "claude-haiku-5-5";
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    signal: AbortSignal.timeout(55_000),
-    headers: { "x-api-key": process.env.OCR_ANTHROPIC_API_KEY!, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({
-      model, max_tokens: 2000,
-      messages: [{ role: "user", content: [
-        { type: "image", source: { type: "base64", media_type: m[1], data: m[2] } },
-        { type: "text", text: "Transcribe the English text in this image exactly as written, including spelling and grammar mistakes. Do not correct, translate, summarise or comment. Keep paragraph breaks as blank lines. Output only the transcription. If there is no readable text, output nothing." },
-      ] }],
-    }),
-  });
-  await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", model_identifier: model, status: res.ok ? "ok" : "error" });
-  if (!res.ok) { console.error("ocr failed", res.status, (await res.text()).slice(0, 200)); return Response.json({ error: "Could not read the image. Please try again." }, { status: 502 }); }
-  const d = await res.json();
-  return Response.json({ text: String(d?.content?.[0]?.text ?? "").trim() });
+  try {
+    const r = await transcribe(m[1], m[2]);
+    await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", model_identifier: `${r.provider}:${r.model}`, status: "ok" });
+    return Response.json({ text: r.text });
+  } catch (e) {
+    console.error("ocr failed:", e);
+    await db.from("ai_usage_logs").insert({ user_id: auth.user.id, operation_type: "ocr", status: "error" });
+    return Response.json({ error: "Could not read the image. Please try again." }, { status: 502 });
+  }
 }
