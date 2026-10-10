@@ -10,7 +10,10 @@ Registration (email confirmation), login/logout, protected cabinet, essay editor
 Essays are saved before the AI call, so an AI failure never loses them. Without Supabase/AI keys the site runs in demo mode: nothing saved, no spend.
 
 ## Attach a file (new essay)
-Photo, PDF, .md or .txt. Markdown/text and PDFs with a text layer are read in the browser; photos and scanned PDFs go through OCR. By default OCR runs on the device (tesseract.js, self-hosted under /public/tesseract, nothing is uploaded; weak on handwriting). Set `OCR_ANTHROPIC_API_KEY` to read photos with a vision model instead (better for handwriting; the image is sent to that service; per-user daily limit `IELTS_DAILY_OCR_LIMIT`). The recognised text always lands in the editor for the student to correct before checking. OCR assets are copied to `public/` on `npm install` (postinstall) and are git-ignored.
+Photo, PDF, .md or .txt. Markdown/text and PDFs with a text layer are read in the browser. Photos and scanned PDFs use OCR:
+- Default: on-device tesseract.js (self-hosted in /public/tesseract, nothing uploaded). It reads typed/printed text only. If confidence is under 60% (typical for handwriting) the text is NOT put into the editor automatically; the student can choose "Insert anyway".
+- Handwriting: set ONE of `GEMINI_API_KEY` (Google AI Studio, free tier), `OPENAI_API_KEY` or `OCR_ANTHROPIC_API_KEY`. The image is then read by that vision model via `/api/ocr` (sign-in required, per-user daily limit `IELTS_DAILY_OCR_LIMIT`, default 10) and the UI tells the student the image is sent to a service. Force a provider with `OCR_PROVIDER`, change model with `OCR_MODEL`.
+The recognised text always lands in the editor for the student to correct before checking. OCR assets are copied to `public/` on `npm install` (postinstall) and are git-ignored.
 
 ## Not built yet
 Teacher cabinet and score correction, RAG over the 50 Markdown books, exercises with re-grading, password reset UI, account deletion, admin pages.

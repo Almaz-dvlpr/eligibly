@@ -1,5 +1,5 @@
 // Client-side import of an essay from a file: text/markdown, PDF (text layer, or OCR for scans) or a photo (OCR).
-export type ImportResult = { text: string; source: string; method: "text" | "pdf-text" | "ocr" | "server-ocr"; warnings: string[] };
+export type ImportResult = { text: string; source: string; method: "text" | "pdf-text" | "ocr" | "server-ocr"; warnings: string[]; confidence?: number };
 type Progress = (msg: string) => void;
 
 const MAX_BYTES = 15 * 1024 * 1024;
@@ -73,7 +73,7 @@ async function serverOcr(blob: Blob): Promise<string> {
   return j.text as string;
 }
 
-async function ocr(src: Blob | HTMLCanvasElement, useServer: boolean, onProgress: Progress, warnings: string[]): Promise<{ text: string; server: boolean }> {
+async function ocr(src: Blob | HTMLCanvasElement, useServer: boolean, onProgress: Progress, warnings: string[]): Promise<{ text: string; server: boolean; confidence?: number }> {
   const blob = src instanceof Blob ? src : await new Promise<Blob>((res, rej) => src.toBlob((b) => (b ? res(b) : rej(new Error("encode"))), "image/png"));
   if (useServer) {
     onProgress("Reading the image…");
@@ -82,8 +82,7 @@ async function ocr(src: Blob | HTMLCanvasElement, useServer: boolean, onProgress
   const worker = await localWorker(onProgress);
   onProgress("Recognising text…");
   const { data } = await worker.recognize(blob);
-  if (data.confidence < 65) warnings.push(`Low recognition confidence (${Math.round(data.confidence)}%). Typed or printed text works best; please check every line.`);
-  return { text: data.text, server: false };
+  return { text: data.text, server: false, confidence: data.confidence };
 }
 
 async function pdfText(file: File, onProgress: Progress, useServer: boolean, warnings: string[]): Promise<ImportResult> {
@@ -107,7 +106,7 @@ async function pdfText(file: File, onProgress: Progress, useServer: boolean, war
   if (text.replace(/\s/g, "").length >= 80) return { text: tidy(text), source: file.name, method: "pdf-text", warnings };
 
   // No text layer: this PDF is a scan. Render each page and run OCR.
-  let out = "", server = false;
+  let out = "", server = false, minConf: number | undefined;
   for (let i = 1; i <= pages; i++) {
     onProgress(`Recognising page ${i} of ${pages}…`);
     const page = await doc.getPage(i);
@@ -117,9 +116,10 @@ async function pdfText(file: File, onProgress: Progress, useServer: boolean, war
     await page.render({ canvas, canvasContext: canvas.getContext("2d")!, viewport }).promise;
     const r = await ocr(canvas, useServer, onProgress, warnings);
     server = r.server; out += r.text + "\n\n";
+    if (r.confidence !== undefined) minConf = Math.min(minConf ?? 100, r.confidence);
   }
   warnings.push("This PDF is a scan, so the text was recognised from images.");
-  return { text: tidy(out), source: file.name, method: server ? "server-ocr" : "ocr", warnings: [...new Set(warnings)] };
+  return { text: tidy(out), source: file.name, method: server ? "server-ocr" : "ocr", warnings: [...new Set(warnings)], confidence: minConf };
 }
 
 export async function importFile(file: File, opts: { serverOcr: boolean; onProgress: Progress }): Promise<ImportResult> {
@@ -136,8 +136,7 @@ export async function importFile(file: File, opts: { serverOcr: boolean; onProgr
   if (file.type.startsWith("image/") || /\.(jpe?g|png|webp|gif|bmp)$/.test(name)) {
     try { await createImageBitmap(file); } catch { throw new Error("This image format cannot be opened in the browser (HEIC?). Please save it as JPG or PNG."); }
     const r = await ocr(file, opts.serverOcr, opts.onProgress, warnings);
-    if (!opts.serverOcr) warnings.push("Handwriting may be recognised poorly. Please check the text carefully.");
-    return { text: tidy(r.text), source: file.name, method: r.server ? "server-ocr" : "ocr", warnings };
+    return { text: tidy(r.text), source: file.name, method: r.server ? "server-ocr" : "ocr", warnings, confidence: r.confidence };
   }
   throw new Error("Unsupported file. Use a photo (JPG/PNG), PDF, or a .md/.txt file.");
 }
