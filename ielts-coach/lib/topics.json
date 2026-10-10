@@ -1,0 +1,1666 @@
+[
+ {
+  "id": 1,
+  "en": "Education",
+  "ru": "Образование",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that university education should be free for everyone. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people think that schools should focus more on practical skills than academic subjects. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Online learning is becoming more popular than traditional classroom education. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 4,
+    "text": "Many students experience high levels of stress because of examinations. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that children should start learning a foreign language at primary school. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "en": "Work and Career",
+  "ru": "Работа и карьера",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that job satisfaction is more important than a high salary. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Working from home is becoming increasingly common. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 3,
+    "text": "Many people change careers several times during their working lives. Why does this happen? Is it a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that employees should work four days a week instead of five. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Governments should encourage people to continue working beyond the traditional retirement age. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "en": "Family",
+  "ru": "Семья",
+  "questions": [
+   {
+    "n": 1,
+    "text": "In many countries, family members spend less time together than in the past. Why is this happening? What effects does it have?",
+    "type": "two_part"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that parents should be responsible for teaching children good behaviour, while others think schools should do this. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "More young adults are choosing to live independently rather than with their families. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that grandparents play an essential role in raising children. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "In many societies, the traditional family structure is changing. What are the reasons for this, and what effects might it have?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "en": "Friends and Friendship",
+  "ru": "Дружба",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that having a few close friends is better than having many friends. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Social media has changed the way people form and maintain friendships. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that friendships formed during childhood are more valuable than those formed in adulthood. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "People today find it more difficult to develop meaningful friendships. What are the reasons, and how can this problem be addressed?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that friends have a greater influence on young people than their parents. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "en": "Hometown",
+  "ru": "Родной город",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Many young people leave their hometowns to study or work in larger cities. What are the reasons for this, and what problems can it cause?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that local governments should spend more money on improving public spaces. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Small towns are losing their populations as people move to major cities. What problems does this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that preserving historical buildings is more important than constructing modern ones. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Tourism can bring economic benefits to small towns, but it may also create problems. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "en": "Home and Accommodation",
+  "ru": "Дом и жильё",
+  "questions": [
+   {
+    "n": 1,
+    "text": "In many countries, housing is becoming increasingly expensive. What are the causes, and what solutions can governments provide?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people prefer renting a home, while others believe that owning a property is better. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "More people are choosing to live in apartments rather than houses. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Governments should provide affordable housing for all citizens. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Modern homes are increasingly equipped with smart technologies. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "en": "Hobbies and Interests",
+  "ru": "Хобби",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people think that hobbies should be educational, while others believe they should simply be enjoyable. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "People today spend less time on traditional hobbies. Why is this happening? Is it a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that having hobbies improves productivity at work or school. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Expensive hobbies are becoming increasingly popular. Why is this happening? What effects can this trend have?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Schools should encourage students to develop hobbies outside academic subjects. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "en": "Daily Routine",
+  "ru": "Распорядок дня",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Many people struggle to maintain a healthy daily routine. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that waking up early leads to greater success. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Modern lifestyles leave people with less time for rest and relaxation. What problems does this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people prefer a fixed daily schedule, while others prefer flexibility. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Technology has significantly changed people's daily routines. Do the advantages of these changes outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "en": "Free Time and Leisure",
+  "ru": "Свободное время",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people prefer spending their free time alone, while others enjoy social activities. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "People today spend more leisure time using electronic devices than participating in outdoor activities. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "Governments should invest more money in public recreational facilities. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that leisure activities should be productive rather than purely relaxing. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Many people have less free time than previous generations. What are the reasons, and what effects does this have on society?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "en": "Travel and Tourism",
+  "ru": "Путешествия",
+  "questions": [
+   {
+    "n": 1,
+    "text": "International tourism brings economic benefits but can damage local cultures and environments. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that travelling abroad is essential for understanding other cultures. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "The number of tourists visiting popular destinations has increased significantly. What problems does this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people prefer travelling independently, while others prefer organised tours. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Governments should encourage domestic tourism rather than international tourism. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 11,
+  "en": "Holidays and Vacations",
+  "ru": "Каникулы и отпуск",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that employees should receive more paid holiday leave. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Taking frequent short holidays is better than having one long holiday each year. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "School holidays should be shorter to improve students' academic performance. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "More people are choosing to spend their holidays at home instead of travelling abroad. Why is this happening? Is it a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that holidays are necessary for mental and physical health. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 12,
+  "en": "Food and Cooking",
+  "ru": "Еда",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Fast food is becoming increasingly popular around the world. What are the causes, and what effects does this have on people's health?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that governments should introduce taxes on unhealthy foods. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Traditional cooking is becoming less common in many households. Why is this happening? Is it a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that schools should teach children how to cook healthy meals. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "More people are choosing vegetarian or plant-based diets. What are the reasons for this trend? Do the benefits outweigh the drawbacks?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 13,
+  "en": "Health and Fitness",
+  "ru": "Здоровье",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that governments should spend more money on preventing diseases rather than treating them. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Obesity is becoming a serious problem in many countries. What are the main causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that individuals are responsible for their own health, while others believe governments should take responsibility. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "Regular physical exercise should be compulsory in schools. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "People today have access to better healthcare but still suffer from lifestyle-related illnesses. Why is this happening? What can be done?",
+    "type": "two_part"
+   }
+  ]
+ },
+ {
+  "id": 14,
+  "en": "Sports",
+  "ru": "Спорт",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that professional athletes are paid too much money. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Governments should invest more in public sports facilities than in professional sporting events. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Competitive sports help children develop important life skills. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Hosting international sporting events brings both benefits and drawbacks to a country. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Some people think that schools should make sports compulsory for all students. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 15,
+  "en": "Technology",
+  "ru": "Технологии",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Technology has made people's lives easier but also more complicated. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that technological developments have reduced face-to-face communication. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Automation is replacing human workers in many industries. What problems might this cause, and how can they be addressed?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that children should be introduced to modern technology at an early age. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Governments should invest more in technological development than in traditional public services. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 16,
+  "en": "Internet and Social Media",
+  "ru": "Интернет и социальные сети",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Social media has more negative effects than positive effects on society. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that social media companies should be responsible for preventing misinformation. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Children are spending increasing amounts of time on social networking platforms. What problems can this cause, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "The internet has made information more accessible than ever before. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that online communication is replacing meaningful personal relationships. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 17,
+  "en": "Artificial Intelligence",
+  "ru": "Искусственный интеллект",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Artificial intelligence is expected to replace many human jobs. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that AI should be widely used in education, while others think it may harm students' learning. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Governments should introduce strict regulations on the development and use of artificial intelligence. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Artificial intelligence can improve healthcare services. Do the advantages of using AI in medicine outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Some people think that relying heavily on artificial intelligence will reduce human creativity and critical thinking. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 18,
+  "en": "Environment",
+  "ru": "Окружающая среда",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that individuals can do little to protect the environment and that governments and large companies should take responsibility. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Environmental protection should be prioritised over economic growth. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Many countries face increasing environmental problems. What are the main causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that environmental education should be compulsory in schools. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Consumers are increasingly encouraged to buy environmentally friendly products. Do the advantages of this trend outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 19,
+  "en": "Climate Change",
+  "ru": "Изменение климата",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that climate change is the greatest challenge facing humanity. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Governments should introduce higher taxes on industries that produce large amounts of greenhouse gases. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that individuals should change their lifestyles to combat climate change, while others think governments should take the lead. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "Climate change is causing more extreme weather events around the world. What problems does this create, and how can countries respond?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 5,
+    "text": "Investing in renewable energy is the most effective way to address climate change. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 20,
+  "en": "Pollution",
+  "ru": "Загрязнение",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Air pollution is becoming a major problem in many large cities. What are the causes, and what measures can be taken to reduce it?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Plastic waste is damaging oceans and marine life. What problems does this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that private cars should be banned from city centres to reduce pollution. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Industrial pollution is increasing in developing countries. Who should be responsible for solving this problem?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Governments should impose stricter penalties on companies that pollute the environment. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 21,
+  "en": "Animals and Wildlife",
+  "ru": "Животные и дикая природа",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that zoos are necessary for protecting endangered species, while others think they are cruel. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Governments should spend more money on protecting endangered animals. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Human activities are causing the extinction of many animal species. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that animal testing should be banned completely. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Protecting wildlife habitats is more important than developing land for human use. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 22,
+  "en": "Nature and Outdoor Activities",
+  "ru": "Природа и активный отдых",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Children today spend less time outdoors than previous generations. Why is this happening, and what effects does it have?",
+    "type": "two_part"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that spending time in nature improves mental health. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "National parks should be protected from commercial development. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Outdoor activities are becoming less popular among young people. What are the causes, and how can this trend be reversed?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that outdoor education should be a compulsory part of the school curriculum. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 23,
+  "en": "Transportation",
+  "ru": "Транспорт",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Traffic congestion is a serious problem in many cities. What are the main causes, and what solutions can governments introduce?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Electric vehicles are becoming increasingly popular. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that governments should invest more in railways than in roads. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "The increasing number of private cars is creating environmental problems. What measures can be taken to reduce car dependency?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Self-driving vehicles may become common in the future. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 24,
+  "en": "Public Transport",
+  "ru": "Общественный транспорт",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Public transportation should be free for all citizens. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people prefer using private cars, while others believe public transport is better. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Governments should improve public transport systems to reduce traffic congestion. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "In many cities, public transport is underused. What are the reasons, and how can governments encourage more people to use it?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Investing in underground railway systems is better than expanding bus services. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 25,
+  "en": "Cities and Urban Life",
+  "ru": "Городская жизнь",
+  "questions": [
+   {
+    "n": 1,
+    "text": "More people are moving to large cities. What are the reasons for this trend, and what problems can it create?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that living in a big city offers more opportunities than living in a small town. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Overpopulation is becoming a serious issue in many urban areas. What problems does this cause, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Governments should create more green spaces in cities rather than build new commercial centres. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Modern cities are becoming less suitable for raising children. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 26,
+  "en": "Countryside and Rural Life",
+  "ru": "Сельская жизнь",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Many young people are leaving rural areas to live in cities. What are the causes, and what effects does this have on rural communities?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that living in the countryside is healthier than living in a city. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Governments should invest more in rural infrastructure and services. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Modern technology is making it easier for people to live and work in rural areas. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 5,
+    "text": "Agricultural land is increasingly being used for housing and industrial development. What problems does this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 27,
+  "en": "Shopping",
+  "ru": "Покупки",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Online shopping is replacing traditional retail stores. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that shopping has become a popular leisure activity rather than a necessity. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "People are buying more products than they need. What are the causes, and what effects does this have on society?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that consumers should prioritise locally produced goods over imported products. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Shopping centres are becoming increasingly popular among young people. What are the reasons, and what effects might this have?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 28,
+  "en": "Money and Personal Finance",
+  "ru": "Деньги и финансы",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Financial education should be a compulsory subject in schools. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that saving money is more important than spending it on experiences. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Many young adults are experiencing financial difficulties. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "A society without cash may become a reality in the future. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Some people think that money is the most important factor in achieving happiness. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 29,
+  "en": "Advertising",
+  "ru": "Реклама",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Advertising encourages people to buy products they do not need. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that advertisements aimed at children should be banned. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Social media influencers are increasingly used to promote products. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that advertising provides useful information, while others believe it manipulates consumers. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Governments should regulate advertisements for unhealthy food and drinks. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 30,
+  "en": "Business and Entrepreneurship",
+  "ru": "Бизнес",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that starting a business is better than working for an employer. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Governments should provide financial support to small businesses. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Large multinational companies are becoming increasingly powerful. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that businesses should prioritise social responsibility over profits. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Young people are increasingly interested in becoming entrepreneurs. Why is this happening? Is it a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 31,
+  "en": "Culture and Traditions",
+  "ru": "Культура и традиции",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Globalisation is causing traditional cultures to disappear. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that traditional customs should be preserved, while others think societies should adapt to modern lifestyles. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Schools should teach children about their country's traditions and cultural heritage. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Tourism can threaten local cultures and traditions. What problems does this cause, and how can they be prevented?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that cultural diversity makes societies stronger. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 32,
+  "en": "History",
+  "ru": "История",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that studying history is essential, while others think it has little relevance to modern life. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Schools should spend more time teaching national history than world history. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Historical buildings should be preserved even if maintenance is expensive. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Museums are the best places for young people to learn about history. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that societies can avoid repeating mistakes by studying history. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 33,
+  "en": "Art and Creativity",
+  "ru": "Искусство и творчество",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Governments should financially support artists and cultural institutions. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that art should be a compulsory subject in schools. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Modern technology is changing the way art is created and experienced. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 4,
+    "text": "Some people believe that artistic talent is natural, while others think creativity can be developed through education. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Public money should be spent on essential services rather than art and cultural projects. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 34,
+  "en": "Music",
+  "ru": "Музыка",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that music is essential for children's development. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Traditional music is becoming less popular among younger generations. Why is this happening, and how can it be preserved?",
+    "type": "two_part"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that music brings people from different cultures together. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Schools should provide music education for all students. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Streaming services have changed how people listen to music. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 35,
+  "en": "Movies and Cinema",
+  "ru": "Кино",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that movies should primarily entertain, while others think they should educate viewers. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Watching films at home is becoming more popular than going to the cinema. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "Violent movies can negatively influence children's behaviour. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Governments should financially support national film industries. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Foreign films are becoming increasingly popular in many countries. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 36,
+  "en": "Books and Reading",
+  "ru": "Книги и чтение",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that reading books is more beneficial than watching television. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "E-books are becoming more popular than printed books. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 3,
+    "text": "Children today read fewer books than previous generations. What are the reasons, and how can this trend be reversed?",
+    "type": "two_part"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that schools should focus more on encouraging reading for pleasure. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Public libraries are becoming less important because information is available online. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 37,
+  "en": "News and Media",
+  "ru": "Новости и СМИ",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that news organisations focus too much on negative events. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Social media is becoming a major source of news. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that governments should regulate the news media to prevent false information. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "Newspapers are losing popularity because of digital media. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 5,
+    "text": "The media has a significant influence on public opinion. What problems can this cause, and how can they be addressed?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 38,
+  "en": "Communication",
+  "ru": "Общение",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Modern technology has improved communication between people. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that face-to-face communication is more effective than online communication. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Communication skills should be taught as a compulsory subject in schools. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "People from different generations often experience communication difficulties. What are the reasons, and how can these problems be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 5,
+    "text": "Many people prefer texting to speaking on the phone. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 39,
+  "en": "Languages and Language Learning",
+  "ru": "Изучение языков",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that learning English is more important than preserving local languages. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Children should start learning a second language at an early age. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that living in a foreign country is the best way to learn a language. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "Many minority languages are disappearing around the world. What are the causes, and what can be done to protect them?",
+    "type": "two_part"
+   },
+   {
+    "n": 5,
+    "text": "Translation technology may reduce the need to learn foreign languages. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 40,
+  "en": "Childhood and Memories",
+  "ru": "Детство и воспоминания",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that childhood is the happiest period of life, while others think adulthood is more enjoyable. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Children today spend less time playing outside than previous generations. What are the causes, and what effects does this have?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that childhood experiences strongly influence adult personality. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Parents today put too much pressure on children to succeed academically. What problems can this cause, and how can they be solved?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 5,
+    "text": "Children should be encouraged to make their own decisions from an early age. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 41,
+  "en": "Personal Goals and Ambitions",
+  "ru": "Цели и амбиции",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that setting ambitious goals is essential for success. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Young people today face increasing pressure to achieve professional success. What are the causes, and what effects can this have?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that personal happiness is more important than achieving career ambitions. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "Schools should teach students how to set and achieve personal goals. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that long-term planning is more important than living in the present. Discuss both views and give your opinion.",
+    "type": "discuss"
+   }
+  ]
+ },
+ {
+  "id": 42,
+  "en": "Success and Achievement",
+  "ru": "Успех и достижения",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that hard work is more important than talent in achieving success. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "Success is often measured by wealth and social status. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that failure is an essential part of achieving success. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Schools should reward effort rather than academic achievement. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that successful individuals have a responsibility to help others. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 43,
+  "en": "Happiness and Well-being",
+  "ru": "Счастье и благополучие",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that money is the main source of happiness, while others think relationships and personal experiences are more important. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 2,
+    "text": "People in wealthy countries are not necessarily happier than those in poorer countries. Why might this be the case?",
+    "type": "two_part"
+   },
+   {
+    "n": 3,
+    "text": "Governments should consider citizens' happiness when making public policies. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Modern lifestyles have made people less happy despite improvements in living standards. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that helping others is one of the best ways to achieve personal happiness. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 44,
+  "en": "Stress and Mental Health",
+  "ru": "Стресс и психическое здоровье",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Stress is becoming increasingly common among working adults. What are the causes, and how can it be reduced?",
+    "type": "two_part"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that mental health should receive the same level of attention as physical health. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 3,
+    "text": "Social media can negatively affect the mental health of young people. What problems can this create, and how can they be addressed?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 4,
+    "text": "Schools should provide mental health education and support for students. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Modern working conditions are contributing to higher levels of stress and anxiety. What changes could employers introduce to address this issue?",
+    "type": "two_part"
+   }
+  ]
+ },
+ {
+  "id": 45,
+  "en": "Time Management",
+  "ru": "Управление временем",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that effective time management is more important than natural ability for achieving success. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Many students struggle to balance academic responsibilities and personal life. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Technology is supposed to save time, but many people feel busier than ever. Why is this happening?",
+    "type": "two_part"
+   },
+   {
+    "n": 4,
+    "text": "Some people prefer planning every hour of their day, while others believe flexibility is more important. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Employers should allow workers greater flexibility in managing their working hours. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 46,
+  "en": "Fashion and Clothing",
+  "ru": "Мода и одежда",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that fashion has become too important in modern society. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Fast fashion has negative effects on the environment. What are the causes of this problem, and how can it be addressed?",
+    "type": "two_part"
+   },
+   {
+    "n": 3,
+    "text": "Some people think that students should wear school uniforms, while others believe they should choose their own clothes. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "People increasingly follow international fashion trends instead of traditional clothing styles. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that clothing choices reflect a person's character and social identity. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 47,
+  "en": "Festivals and Celebrations",
+  "ru": "Фестивали и праздники",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that traditional festivals are losing their meaning in modern society. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Governments should spend money on national festivals and celebrations. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 3,
+    "text": "International festivals can promote cultural understanding between countries. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that spending large amounts of money on weddings and celebrations is unnecessary. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "Commercialisation is changing the way traditional holidays are celebrated. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 48,
+  "en": "Science and Inventions",
+  "ru": "Наука и изобретения",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Scientific research should primarily focus on improving people's lives. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Governments should invest more money in scientific research than in cultural activities. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that space exploration is a waste of public money. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Scientific inventions have improved people's lives but also created new problems. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Private companies are increasingly involved in scientific research. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ },
+ {
+  "id": 49,
+  "en": "Crime and Punishment",
+  "ru": "Преступность и наказание",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that longer prison sentences are the most effective way to reduce crime. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Young people are increasingly involved in criminal activities in some societies. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that rehabilitation is more effective than punishment for criminals. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 4,
+    "text": "The use of surveillance cameras in public places can help reduce crime. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 5,
+    "text": "Some people believe that poverty and unemployment are the main causes of crime. To what extent do you agree or disagree?",
+    "type": "opinion"
+   }
+  ]
+ },
+ {
+  "id": 50,
+  "en": "Government and Society",
+  "ru": "Государство и общество",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Governments should prioritise healthcare and education over military spending. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that governments should take greater responsibility for reducing income inequality. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "Public services should be funded mainly through taxation rather than private investment. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Some people think that individuals should have more influence over government decisions. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 5,
+    "text": "Governments should provide financial assistance to unemployed people. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   }
+  ]
+ },
+ {
+  "id": 51,
+  "en": "Globalization",
+  "ru": "Глобализация",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Globalisation has brought more benefits than disadvantages to developing countries. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Some people believe that globalisation threatens national cultures and traditions. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 3,
+    "text": "International trade has made products cheaper and more accessible. Do the advantages outweigh the disadvantages?",
+    "type": "advantages"
+   },
+   {
+    "n": 4,
+    "text": "Multinational corporations are playing an increasingly important role in local economies. Is this a positive or negative development?",
+    "type": "positive_negative"
+   },
+   {
+    "n": 5,
+    "text": "Globalisation has increased economic inequality between countries. What are the causes, and what solutions can you suggest?",
+    "type": "problems_solutions"
+   }
+  ]
+ },
+ {
+  "id": 52,
+  "en": "Future Plans and Predictions",
+  "ru": "Будущее и прогнозы",
+  "questions": [
+   {
+    "n": 1,
+    "text": "Some people believe that technological advances will make people's lives better in the future. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 2,
+    "text": "Many jobs that exist today may disappear within the next few decades. What problems could this cause, and how should societies prepare?",
+    "type": "problems_solutions"
+   },
+   {
+    "n": 3,
+    "text": "Some people believe that future generations will enjoy a higher standard of living than people today. To what extent do you agree or disagree?",
+    "type": "opinion"
+   },
+   {
+    "n": 4,
+    "text": "Governments should focus more on solving current problems rather than preparing for future challenges. Discuss both views and give your opinion.",
+    "type": "discuss"
+   },
+   {
+    "n": 5,
+    "text": "In the future, people may rely more on technology and less on human interaction. Is this a positive or negative development?",
+    "type": "positive_negative"
+   }
+  ]
+ }
+]

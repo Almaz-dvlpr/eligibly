@@ -1,16 +1,17 @@
 import { requireUser } from "@/lib/supabase/server";
 
-export default async function Mistakes() {
+export default async function Patterns() {
   const { supabase, user } = await requireUser();
-  const { data } = await supabase.from("mistake_journal").select("id, error_type, normalized_description, occurrence_count, last_seen_at, skills(code, name)").eq("student_id", user.id).order("occurrence_count", { ascending: false });
+  const { data } = await supabase.from("mistake_journal").select("id, error_type, normalized_description, occurrence_count, last_seen_at").eq("student_id", user.id).order("occurrence_count", { ascending: false });
   return (
     <>
-      <h1>Журнал ошибок</h1>
-      {!data?.length ? <p className="muted">Пока пусто — ошибки появятся после первой проверки.</p> : (
+      <h1>Patterns to polish</h1>
+      <p className="muted">Things that came up more than once are the quickest wins.</p>
+      {!data?.length ? <p className="muted">Nothing here yet — patterns appear after your first checked essay.</p> : (
         <table>
-          <thead><tr><th>Ошибка</th><th>Критерий</th><th>Раз</th><th>Последний раз</th></tr></thead>
+          <thead><tr><th>Pattern</th><th>Criterion</th><th>Seen</th><th>Last seen</th></tr></thead>
           <tbody>{data.map((m: any) => (
-            <tr key={m.id}><td>{m.normalized_description}</td><td>{m.error_type}</td><td>{m.occurrence_count}</td><td>{new Date(m.last_seen_at).toLocaleDateString("ru-RU")}</td></tr>
+            <tr key={m.id}><td>{m.normalized_description}</td><td>{m.error_type}</td><td>{m.occurrence_count}×</td><td>{new Date(m.last_seen_at).toLocaleDateString("en-GB")}</td></tr>
           ))}</tbody>
         </table>
       )}
