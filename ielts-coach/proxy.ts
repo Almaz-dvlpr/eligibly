@@ -1,12 +1,30 @@
+import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
-import { COOKIE, tokenFor } from "@/lib/access";
+
+const PROTECTED = ["/dashboard", "/writing", "/skills", "/history", "/mistakes", "/learning-plan"];
 
 export async function proxy(req: NextRequest) {
-  const code = process.env.ACCESS_CODE;
-  if (!code) return NextResponse.next(); // gate off; /api/assess then stays in demo mode in production
-  if (req.cookies.get(COOKIE)?.value === (await tokenFor(code))) return NextResponse.next();
-  if (req.nextUrl.pathname.startsWith("/api/")) return NextResponse.json({ error: "Нужен код доступа." }, { status: 401 });
-  return NextResponse.redirect(new URL("/login", req.url));
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return NextResponse.next();
+
+  let res = NextResponse.next({ request: req });
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll: () => req.cookies.getAll(),
+      setAll: (list) => {
+        list.forEach(({ name, value }) => req.cookies.set(name, value));
+        res = NextResponse.next({ request: req });
+        list.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+      },
+    },
+  });
+  const { data } = await supabase.auth.getUser(); // refreshes the session cookie
+  const path = req.nextUrl.pathname;
+  if (!data.user && PROTECTED.some((p) => path === p || path.startsWith(p + "/"))) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+  return res;
 }
 
-export const config = { matcher: ["/((?!login|api/login|_next/|favicon.ico).*)"] };
+export const config = { matcher: ["/((?!_next/|favicon.ico).*)"] };

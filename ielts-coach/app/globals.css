@@ -8,3 +8,6 @@ h1{font-size:2rem;line-height:1.2}.card{background:var(--card);border:1px solid 
 .muted{color:var(--muted)}.btn{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px 18px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
 .btn[disabled]{opacity:.5}textarea,input{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg)}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.band{font-size:1.6rem;font-weight:700}
+nav b{margin-right:0}nav form{margin:0}nav>a:first-child{margin-right:auto}
+button.link{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:0}
+label{display:block;margin:12px 0 4px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:8px;border-bottom:1px solid var(--line)}
