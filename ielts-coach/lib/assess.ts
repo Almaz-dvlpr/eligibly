@@ -43,7 +43,7 @@ CALIBRATION - real examiners are conservative. Typical learner essays land betwe
 For each criterion first write "rationale": 2-3 sentences that name the descriptor features you saw or did not see, using the measurements provided. Only then set estimated_band (0.5 steps).
 - Task Response: band 7 needs a clear position AND ideas that are fully extended with specific supporting detail. Generic ideas ("X helps students get knowledge") or examples that only restate the idea cap this at 6.0 or lower. Band 6: all parts addressed but ideas are underdeveloped. Band 5: only partly addressed or mostly general statements. Fewer than 250 words lowers the band.
 - Coherence & Cohesion: band 7 needs a clear progression with logical paragraphing and flexible use of cohesive devices. Mechanical or repeated linkers (On the one hand / However / Also / Therefore) limit this to 6.5 or lower.
-- Lexical Resource: band 7 needs some less common vocabulary and collocations with only occasional errors. Mostly everyday words or repeated key words (see the repeated-word list) is 5.5-6.0.
+- Lexical Resource: judge the range and precision of vocabulary, collocation and word-formation errors against the public band descriptors. Repeating the key words of the topic is natural and must not lower the band by itself.
 - Grammatical Range & Accuracy: band 7 needs a variety of complex structures, frequent error-free sentences and good control. If most sentences are simple or compound with the same patterns and complex structures are rare, this is 5.5-6.0 even when errors are rare. (The complex-sentence share in the measurements is only a rough regex count, so judge by reading the text.)
 Overall coherence of an essay can be higher than its grammar or ideas; criteria must be allowed to differ by 1 band or more.
 
@@ -56,7 +56,7 @@ Rules:
 - vocabulary_suggestions: up to 5 useful, more precise words or collocations for this topic, each with a short meaning and an example sentence.`;
 
 export function userMessage(prompt: string, essay: string, m: Metrics = textMetrics(essay)): string {
-  const facts = `Measurements (computed by software, treat as facts): ${m.words} words, ${m.sentences} sentences, ${m.paragraphs} paragraphs, average ${m.avgSentenceWords} words per sentence, about ${Math.round(m.complexShare * 100)}% of sentences contain a subordinate clause, lexical diversity ${m.lexicalDiversity} (unique/total in first 250 words), repeated content words: ${m.repeated.map((r) => `${r.word} x${r.count}`).join(", ") || "none"}.`;
+  const facts = `Measurements (computed by software, treat as facts): ${m.words} words, ${m.sentences} sentences, ${m.paragraphs} paragraphs, average ${m.avgSentenceWords} words per sentence, about ${Math.round(m.complexShare * 100)}% of sentences contain a subordinate clause.`;
   return `Task prompt:\n${prompt}\n\nEssay:\n${essay}\n\n${facts}\n\nRespond with a json object with keys: task_type ("task2"), criteria {task_response, coherence_cohesion, lexical_resource, grammatical_range_accuracy: {rationale, estimated_band, evidence[{excerpt, issue, explanation, suggested_correction}], strengths[], next_steps[]}}, skill_evidence[{skill_code, evidence_status (needs_practice|ok|insufficient_data), confidence, score}], vocabulary_suggestions[{term, meaning, example}], needs_teacher_review (boolean).`;
 }
 
@@ -81,6 +81,5 @@ export function applyCaps(a: Assessment, m: Metrics): Assessment {
   else if (m.words < 250) cap("task_response", 5.5, `the essay has ${m.words} words (minimum 250).`, "Task Response");
   // Calibrated on examiner-written model answers: strong essays scored 0.22-0.55 on this rough measure, so only an extreme value is a safe signal.
   if (m.complexShare < 0.12) cap("grammatical_range_accuracy", 5.5, `almost no sentences (${Math.round(m.complexShare * 100)}%) use complex structures.`, "Grammar");
-  if (m.repeated.filter((r) => r.count >= 6).length >= 2) cap("lexical_resource", 6, `key words are repeated often (${m.repeated.slice(0, 3).map((r) => `${r.word} x${r.count}`).join(", ")}).`, "Vocabulary");
   return notes.length ? { ...a, calibration_notes: notes } : a;
 }
