@@ -5,6 +5,7 @@ import { importFile } from "@/lib/importFile";
 export default function FileImport({ current, onText }: { current: string; onText: (text: string) => void }) {
   const input = useRef<HTMLInputElement>(null);
   const [serverOcr, setServerOcr] = useState(false);
+  const [provider, setProvider] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -12,7 +13,7 @@ export default function FileImport({ current, onText }: { current: string; onTex
   const [pending, setPending] = useState<{ text: string; confidence: number } | null>(null);
 
   useEffect(() => {
-    fetch("/api/ocr").then((r) => r.json()).then((j) => setServerOcr(!!j.enabled)).catch(() => {});
+    fetch("/api/ocr").then((r) => r.json()).then((j) => { setServerOcr(!!j.enabled); setProvider(j.provider ?? null); }).catch(() => {});
   }, []);
 
   async function pick(e: React.ChangeEvent<HTMLInputElement>) {
@@ -45,7 +46,7 @@ export default function FileImport({ current, onText }: { current: string; onTex
     <div className="card" style={{ margin: "12px 0" }}>
       <b>Attach a file</b> <small className="muted">photo, PDF, .md or .txt</small>
       <p className="muted" style={{ margin: ".3em 0" }}><small>
-        Photos and scans are read {serverOcr ? "by an AI reading service (the image is sent to it)" : "on your device, nothing is uploaded"}. The text appears in the editor so you can correct it before checking.
+        Photos and scans are read {serverOcr ? `by an AI reading service (${provider ?? "AI"}; the image is sent to it)` : "on your device, nothing is uploaded; handwriting is not supported in this mode"}. The text appears in the editor so you can correct it before checking.
       </small></p>
       <input ref={input} type="file" hidden accept="image/*,.pdf,.md,.markdown,.txt,application/pdf,text/plain,text/markdown" onChange={pick} data-testid="file-input" />
       <button type="button" className="btn ghost" disabled={busy} onClick={() => input.current?.click()}>{busy ? "Working…" : "Choose file"}</button>

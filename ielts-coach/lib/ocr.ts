@@ -16,7 +16,13 @@ export function ocrProvider(): OcrProvider | null {
   return k.gemini ? "gemini" : k.openai ? "openai" : k.anthropic ? "anthropic" : null;
 }
 
-const DEFAULT_MODEL: Record<OcrProvider, string> = { gemini: "gemini-2.5-flash", openai: "gpt-4o-mini", anthropic: "claude-haiku-5-5" };
+const DEFAULT_MODEL: Record<OcrProvider, string> = { gemini: "gemini-flash-latest", openai: "gpt-4o-mini", anthropic: "claude-haiku-5-5" };
+// Tried in order when the first Gemini model name is rejected (names get retired over time).
+const GEMINI_FALLBACKS = ["gemini-2.5-flash", "gemini-2.0-flash"];
+
+export class OcrError extends Error {
+  constructor(public provider: OcrProvider, public status: number) { super(`${provider} ${status}`); }
+}
 
 export async function transcribe(mime: string, base64: string): Promise<{ text: string; model: string; provider: OcrProvider }> {
   const provider = ocrProvider();
@@ -27,28 +33,38 @@ export async function transcribe(mime: string, base64: string): Promise<{ text: 
 
   if (provider === "gemini") {
     const base = process.env.GEMINI_BASE_URL ?? "https://generativelanguage.googleapis.com";
-    const res = await fetch(`${base}/v1beta/models/${model}:generateContent`, {
-      method: "POST", signal,
-      headers: { "x-goog-api-key": keys().gemini!, "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ inline_data: { mime_type: mime, data: base64 } }, { text: PROMPT }] }],
-        generationConfig: { temperature: 0, maxOutputTokens: 2500 },
-      }),
-    });
-    if (!res.ok) throw new Error(`gemini ${res.status}: ${(await res.text()).slice(0, 200)}`);
-    const d = await res.json();
-    text = (d?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
+    const candidates = process.env.OCR_MODEL ? [model] : [model, ...GEMINI_FALLBACKS];
+    let lastStatus = 0;
+    for (const m of candidates) {
+      const res = await fetch(`${base}/v1beta/models/${m}:generateContent`, {
+        method: "POST", signal,
+        headers: { "x-goog-api-key": keys().gemini!, "content-type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ inline_data: { mime_type: mime, data: base64 } }, { text: PROMPT }] }],
+          generationConfig: { temperature: 0, maxOutputTokens: 4000 },
+        }),
+      });
+      if (res.ok) {
+        const d = await res.json();
+        text = (d?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
+        return { text: String(text).trim(), model: m, provider };
+      }
+      lastStatus = res.status;
+      console.error(`gemini ${m} -> ${res.status}: ${(await res.text()).slice(0, 300)}`);
+      if (res.status !== 404 && res.status !== 400) break; // key/quota problems will not be fixed by another model
+    }
+    throw new OcrError(provider, lastStatus);
   } else if (provider === "openai") {
     const base = process.env.OPENAI_BASE_URL ?? "https://api.openai.com";
     const res = await fetch(`${base}/v1/chat/completions`, {
       method: "POST", signal,
       headers: { authorization: `Bearer ${keys().openai}`, "content-type": "application/json" },
       body: JSON.stringify({
-        model, max_tokens: 2500, temperature: 0,
+        model, max_tokens: 4000, temperature: 0,
         messages: [{ role: "user", content: [{ type: "text", text: PROMPT }, { type: "image_url", image_url: { url: `data:${mime};base64,${base64}`, detail: "high" } }] }],
       }),
     });
-    if (!res.ok) throw new Error(`openai ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    if (!res.ok) { console.error("openai", res.status, (await res.text()).slice(0, 300)); throw new OcrError("openai", res.status); }
     const d = await res.json();
     text = d?.choices?.[0]?.message?.content ?? "";
   } else {
@@ -56,9 +72,9 @@ export async function transcribe(mime: string, base64: string): Promise<{ text: 
     const res = await fetch(`${base}/v1/messages`, {
       method: "POST", signal,
       headers: { "x-api-key": keys().anthropic!, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-      body: JSON.stringify({ model, max_tokens: 2500, messages: [{ role: "user", content: [{ type: "image", source: { type: "base64", media_type: mime, data: base64 } }, { type: "text", text: PROMPT }] }] }),
+      body: JSON.stringify({ model, max_tokens: 4000, messages: [{ role: "user", content: [{ type: "image", source: { type: "base64", media_type: mime, data: base64 } }, { type: "text", text: PROMPT }] }] }),
     });
-    if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    if (!res.ok) { console.error("anthropic", res.status, (await res.text()).slice(0, 300)); throw new OcrError("anthropic", res.status); }
     const d = await res.json();
     text = d?.content?.[0]?.text ?? "";
   }

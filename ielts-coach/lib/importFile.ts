@@ -61,11 +61,11 @@ async function toBlob(src: Blob | HTMLCanvasElement, maxSide: number): Promise<B
   const ctx = c.getContext("2d")!;
   ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
   ctx.drawImage((bmp ?? src) as CanvasImageSource, 0, 0, c.width, c.height);
-  return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("encode"))), "image/jpeg", 0.88));
+  return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("encode"))), "image/jpeg", 0.92));
 }
 
 async function serverOcr(blob: Blob): Promise<string> {
-  const small = await toBlob(blob, 1800);
+  const small = await toBlob(blob, 2400);
   const dataUrl: string = await new Promise((res) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.readAsDataURL(small); });
   const r = await fetch("/api/ocr", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ image: dataUrl }) });
   const j = await r.json().catch(() => ({}));
