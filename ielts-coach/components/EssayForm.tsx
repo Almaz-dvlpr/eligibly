@@ -5,6 +5,7 @@ import type { Assessment } from "@/lib/assess";
 import type { Topic } from "@/lib/topics";
 import { QTYPE_LABEL } from "@/lib/topics";
 import AssessmentView from "./AssessmentView";
+import FileImport from "./FileImport";
 
 export default function EssayForm({ topics, initialTopic, initialQ }: { topics: Topic[]; initialTopic: number; initialQ: number }) {
   const router = useRouter();
@@ -64,6 +65,7 @@ export default function EssayForm({ topics, initialTopic, initialQ }: { topics: 
         ))}
       </fieldset>
 
+      <FileImport current={essay} onText={setEssay} />
       <label htmlFor="essay">Your essay</label>
       <textarea id="essay" rows={16} value={essay} onChange={(e) => setEssay(e.target.value)} placeholder="Write at least 250 words…" />
       <p className="muted">{words} words {words < 250 ? `· aim for 250+ (${Math.max(0, 250 - words)} to go)` : "· great length"} · draft saved in this browser</p>
