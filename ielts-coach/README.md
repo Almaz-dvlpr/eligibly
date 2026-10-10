@@ -9,8 +9,9 @@ Skill levels come from graded per-skill evidence (score 0-1 + confidence per ess
 Registration (email confirmation), login/logout, protected cabinet, essay editor (draft autosave), AI check by 4 IELTS criteria (schema-validated), saved results and history, skill map with mastery, mistake journal, learning plan (next step = weakest skill), per-user daily limit, usage log.
 Essays are saved before the AI call, so an AI failure never loses them. Without Supabase/AI keys the site runs in demo mode: nothing saved, no spend.
 
-## Attach a file (new essay)
-Photo, PDF, .md or .txt. Markdown/text and PDFs with a text layer are read in the browser. Photos and scanned PDFs use OCR:
+## Attach files (new essay)
+Up to 12 files (40 MB total) per batch: photos, PDF, .md or .txt. Files go into a list (thumbnails, reorder, remove); "+ Add more files" and "Take photo" (opens the phone camera) add to it; "Proceed" reads everything in the order shown and puts the joined text in the editor (replace or append). A page that stops mid-sentence continues the same paragraph. One bad file does not stop the others.
+Single files: Markdown/text and PDFs with a text layer are read in the browser. Photos and scanned PDFs use OCR:
 - Default: on-device tesseract.js (self-hosted in /public/tesseract, nothing uploaded). It reads typed/printed text only. If confidence is under 60% (typical for handwriting) the text is NOT put into the editor automatically; the student can choose "Insert anyway".
 - Handwriting: set ONE of `GEMINI_API_KEY` (Google AI Studio, free tier), `OPENAI_API_KEY` or `OCR_ANTHROPIC_API_KEY`. The image is then read by that vision model via `/api/ocr` (sign-in required, per-user daily limit `IELTS_DAILY_OCR_LIMIT`, default 10) and the UI tells the student the image is sent to a service. Force a provider with `OCR_PROVIDER`, change model with `OCR_MODEL`.
 The recognised text always lands in the editor for the student to correct before checking. OCR assets are copied to `public/` on `npm install` (postinstall) and are git-ignored.

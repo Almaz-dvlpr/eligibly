@@ -9,7 +9,7 @@ export const maxDuration = 60;
 const enabled = () => !!ocrProvider() && supabaseConfigured() && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function GET() {
-  return Response.json({ enabled: enabled(), provider: ocrProvider() });
+  return Response.json({ enabled: enabled(), provider: ocrProvider(), limit: Number(process.env.IELTS_DAILY_OCR_LIMIT ?? 10) });
 }
 
 export async function POST(req: Request) {

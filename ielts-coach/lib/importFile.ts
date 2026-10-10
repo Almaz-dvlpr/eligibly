@@ -81,7 +81,7 @@ async function ocr(src: Blob | HTMLCanvasElement, useServer: boolean, onProgress
   }
   const worker = await localWorker(onProgress);
   onProgress("Recognising text…");
-  const { data } = await worker.recognize(blob);
+  const { data } = await worker.recognize(src instanceof Blob ? await toBlob(src, 3000) : blob);
   return { text: data.text, server: false, confidence: data.confidence };
 }
 
@@ -139,4 +139,14 @@ export async function importFile(file: File, opts: { serverOcr: boolean; onProgr
     return { text: tidy(r.text), source: file.name, method: r.server ? "server-ocr" : "ocr", warnings, confidence: r.confidence };
   }
   throw new Error("Unsupported file. Use a photo (JPG/PNG), PDF, or a .md/.txt file.");
+}
+
+/** Joins the text of several files (pages) in order. A page that stops mid-sentence continues the same paragraph. */
+export function combineTexts(texts: string[]): string {
+  let out = "";
+  for (const t of texts.map((x) => x.trim()).filter(Boolean)) {
+    if (!out) out = t;
+    else out += (/[.!?\u2026"\u201d'\u2019)]$/.test(out) ? "\n\n" : " ") + t;
+  }
+  return out;
 }
