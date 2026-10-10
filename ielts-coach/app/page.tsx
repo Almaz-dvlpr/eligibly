@@ -5,16 +5,15 @@ export default async function Home() {
   const user = await currentUser();
   return (
     <>
-      <h1>Не просто оценка эссе, а путь к следующему band</h1>
-      <p className="muted">Проверка по четырём критериям IELTS → навык, который проседает → следующий шаг → повторная проверка → обновлённый план.</p>
-      <p>
-        {user ? <Link className="btn" href="/dashboard">В кабинет</Link> : <><Link className="btn" href="/register">Создать аккаунт</Link> <Link href="/login">Войти</Link></>}
-      </p>
+      <h1>Your personal IELTS Writing coach</h1>
+      <p className="muted">Write on 52 topics, get balanced feedback on all four IELTS criteria, and follow a plan built around your own next step.</p>
+      <p>{user ? <Link className="btn" href="/dashboard">Go to dashboard</Link> : <><Link className="btn" href="/register">Create account</Link> <Link href="/login">Sign in</Link></>}</p>
       <div className="grid">
-        <div className="card"><b>Self-study</b><p className="muted">Система сама выбирает слабый навык и назначает следующий шаг.</p></div>
-        <div className="card"><b>Журнал ошибок</b><p className="muted">Повторяющиеся ошибки собираются в одном месте.</p></div>
-        <div className="card"><b>Честные оценки</b><p className="muted">Band — ориентир ИИ, не официальный балл IELTS.</p></div>
+        <div className="panel strengths"><h3>Your strengths</h3>See what you already do well.</div>
+        <div className="panel growth"><h3>Growth opportunities</h3>Skills that are taking shape.</div>
+        <div className="panel focus"><h3>Next focus</h3>One clear step toward your target band.</div>
       </div>
+      <p className="muted">Band estimates are practice estimates by AI, not official IELTS scores.</p>
     </>
   );
 }
