@@ -9,6 +9,9 @@ Skill levels come from graded per-skill evidence (score 0-1 + confidence per ess
 Registration (email confirmation), login/logout, protected cabinet, essay editor (draft autosave), AI check by 4 IELTS criteria (schema-validated), saved results and history, skill map with mastery, mistake journal, learning plan (next step = weakest skill), per-user daily limit, usage log.
 Essays are saved before the AI call, so an AI failure never loses them. Without Supabase/AI keys the site runs in demo mode: nothing saved, no spend.
 
+## Attach a file (new essay)
+Photo, PDF, .md or .txt. Markdown/text and PDFs with a text layer are read in the browser; photos and scanned PDFs go through OCR. By default OCR runs on the device (tesseract.js, self-hosted under /public/tesseract, nothing is uploaded; weak on handwriting). Set `OCR_ANTHROPIC_API_KEY` to read photos with a vision model instead (better for handwriting; the image is sent to that service; per-user daily limit `IELTS_DAILY_OCR_LIMIT`). The recognised text always lands in the editor for the student to correct before checking. OCR assets are copied to `public/` on `npm install` (postinstall) and are git-ignored.
+
 ## Not built yet
 Teacher cabinet and score correction, RAG over the 50 Markdown books, exercises with re-grading, password reset UI, account deletion, admin pages.
 
