@@ -13,7 +13,8 @@ export default function VocabManager({ words }: { words: Word[] }) {
   async function add(e: React.FormEvent) {
     e.preventDefault(); setError("");
     const res = await fetch("/api/vocabulary", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ term, meaning }) });
-    if (res.ok) { setTerm(""); setMeaning(""); router.refresh(); } else setError((await res.json()).error ?? "Error");
+    const j = await res.json().catch(() => ({}));
+    if (res.ok) { setTerm(""); setMeaning(""); if (j.duplicate) setError("This word is already in your bank."); router.refresh(); } else setError(j.error ?? "Error");
   }
   async function remove(id: string) {
     await fetch("/api/vocabulary", { method: "DELETE", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
