@@ -10,7 +10,7 @@ export default async function Vocabulary() {
     <>
       <h1>Vocabulary Bank</h1>
       <p className="muted">Your personal list of useful words and expressions.</p>
-      {error && <p role="alert" style={{ color: "crimson" }}>Could not load your words{error.code === "42P01" ? ": run migration 0003_cabinet.sql in Supabase." : "."}</p>}
+      {error && <p role="alert" style={{ color: "crimson" }}>Could not load your words{error.code === "42P01" ? ": run migration 0004_vocabulary_repair.sql in Supabase." : "."}</p>}
       <VocabManager words={data ?? []} />
     </>
   );

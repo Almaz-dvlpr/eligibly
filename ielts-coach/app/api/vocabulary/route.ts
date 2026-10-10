@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   if (error?.code === "23505") return Response.json({ ok: true, duplicate: true }); // already in the bank
   if (error) {
     console.error("vocabulary insert failed:", error.code, error.message);
-    const hint = error.code === "42P01" ? "The database is missing the vocabulary table: run migration 0003_cabinet.sql in Supabase." : `Could not save (${error.code ?? "error"}).`;
+    const hint = error.code === "42P01" ? "The database is missing the vocabulary table: run migration 0004_vocabulary_repair.sql in Supabase." : `Could not save (${error.code ?? "error"}).`;
     return Response.json({ error: hint }, { status: 500 });
   }
   revalidatePath("/vocabulary");
